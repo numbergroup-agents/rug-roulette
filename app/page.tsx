@@ -81,8 +81,15 @@ export default function Home() {
   const playerWon = gameState === 'finished' && 
     slots.find(s => s.id === selectedSlot)?.status === 'survivor';
 
+  const isProgramConfigured = !!process.env.NEXT_PUBLIC_PROGRAM_ID;
+
   return (
     <main className="bg-casino min-h-screen px-4 py-8 md:p-12 relative">
+      {!isProgramConfigured && (
+        <div className="bg-yellow-500/20 border-b border-yellow-500/50 p-2 text-center text-sm text-yellow-200 fixed top-0 left-0 right-0 z-50 backdrop-blur-md">
+          ⚠️ <b>UI Demo Mode</b>: Solana program not configured. Game logic is simulated locally.
+        </div>
+      )}
       <div className="mx-auto max-w-5xl">
         
         {/* Header */}
